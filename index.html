@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>snake game</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <main>
         <section>
@@ -24,6 +26,16 @@
             <div class="game-area">
             </div>
         </section>
+        <div class="modal">
+            <div class="start-screen">
+                <h2>Welcome To The Snake Game</h2>
+                <button id="start-btn">Start Game</button>
+            </div>
+            <div class="game-over-screen hidden">
+                <h2>Game Over</h2>
+                <button id="restart-btn">Restart</button>
+            </div>
+        </div>
     </main>
     <script src="script.js"></script>
 </body>

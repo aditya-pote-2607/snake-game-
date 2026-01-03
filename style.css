@@ -11,6 +11,8 @@ html, body{
    color: white;
 }
 :root{
+    /*button color*/
+    --button-color: rgb(99, 243, 50);
     /*background colors*/
     --bg-color: rgb(18, 18, 18);
     --bg-secondary-color: rgb(54, 52, 52);
@@ -72,4 +74,38 @@ padding: 30px;
 }
 .food{
     background-color: red;
+}
+
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hidden{
+    display: none;
+}
+.start-screen, .game-over-screen{
+    text-align: center;
+}
+.start-screen button, .game-over-screen button{
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: var(--font-size-medium);
+    border: none;
+    border-radius: var(--bor-r-small);
+    cursor: pointer;
+    animation: transition 0.3s ease-in-out;
+    background-color: var(--button-color);
+}
+.start-screen button:hover, .game-over-screen button:hover{
+    background-color: var(--border-color);
+    color: var(--bg-secondary-color);
+    transform: scale(1.1);
 }
