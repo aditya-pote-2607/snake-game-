@@ -32,6 +32,7 @@ html, body{
     --bor-r-small: 10px;
     --bor-r-medium: 15px;
     --bor-r-large: 20px;
+    --bor-round: 50%;
     
 }
 section{
@@ -71,6 +72,16 @@ padding: 30px;
 }
 .snake{
     background-color: green;
+    animation: snake-move,background-color 0.4s linear infinite;
+}
+
+@keyframes snake-move {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 .food{
     background-color: red;
