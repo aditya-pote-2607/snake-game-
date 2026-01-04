@@ -7,7 +7,7 @@ const restartBtn = document.querySelector('#restart-btn');
 const gameHeight = 50;
 const gameWidth = 50;
 let Score = 0;
-let  highScore = 0;
+let highScore = 0;
 let time = "00-00";
 const savedHighScore = localStorage.getItem('highScore');
 
@@ -17,7 +17,7 @@ const rows = Math.floor(gameArea.clientHeight / gameHeight);
 let setIntervalID = null;
 let timeIntervalID = null;
 
-let food = { x:Math.floor(Math.random() * rows), y: Math.floor(Math.random() * col) };
+let food = { x: Math.floor(Math.random() * rows), y: Math.floor(Math.random() * col) };
 const boxes = [];
 let snake = [
     { x: 1, y: 3 },
@@ -44,7 +44,7 @@ function drawSnake() {
         head = { x: snake[0].x, y: snake[0].y - 1 };
     } else if (drection === 'RIGHT') {
         head = { x: snake[0].x, y: snake[0].y + 1 };
-    }   
+    }
     if (head.x < 0 || head.x >= rows || head.y < 0 || head.y >= col) {
         clearInterval(setIntervalID);
         document.querySelector('.modal').classList.remove('hidden');
@@ -53,9 +53,9 @@ function drawSnake() {
         return;
     }
 
-    if(head.x === food.x && head.y === food.y) {
+    if (head.x === food.x && head.y === food.y) {
         boxes[`${food.x}-${food.y}`].classList.remove('food');
-        food ={ x:Math.floor(Math.random() * rows), y: Math.floor(Math.random() * col) };
+        food = { x: Math.floor(Math.random() * rows), y: Math.floor(Math.random() * col) };
         boxes[`${food.x}-${food.y}`].classList.add('food');
         snake.unshift(head);
         Score += 10;
@@ -66,8 +66,20 @@ function drawSnake() {
             highScoreBoard.innerText = `${highScore}`;
         }
     }
+    if (Score > 100) {
+        clearInterval(setIntervalID);
+        setIntervalID = setInterval(() => {
+            drawSnake();
+        }, 100);
+    }
+    else if (Score > 50) {
+        clearInterval(setIntervalID);
+        setIntervalID = setInterval(() => {
+            drawSnake();
+        }, 200);
+    }
     snake.forEach(segment => {
-         boxes[`${segment.x}-${segment.y}`].classList.remove('snake');
+        boxes[`${segment.x}-${segment.y}`].classList.remove('snake');
     });
     snake.unshift(head)
     snake.pop();
@@ -80,19 +92,19 @@ function drawSnake() {
 
 startBtn.addEventListener('click', () => {
     document.querySelector('.modal').classList.add('hidden');
-    setIntervalID =setInterval(() => {
-    drawSnake();
-}, 400);
-timeIntervalID = setInterval(() => {
-    let [mins, secs] = time.split('-').map(Number);
-    secs++;
-    if (secs === 60) {
-        mins++;
-        secs = 0;
-    }
-    time = `${mins}-${secs}`;
-    timeBoard.innerText = `${time}`;
-}, 1000);
+    setIntervalID = setInterval(() => {
+        drawSnake();
+    }, 400);
+    timeIntervalID = setInterval(() => {
+        let [mins, secs] = time.split('-').map(Number);
+        secs++;
+        if (secs === 60) {
+            mins++;
+            secs = 0;
+        }
+        time = `${mins}-${secs}`;
+        timeBoard.innerText = `${time}`;
+    }, 1000);
 });
 restartBtn.addEventListener('click', resetGame);
 function resetGame() {
@@ -101,12 +113,12 @@ function resetGame() {
         boxes[`${segment.x}-${segment.y}`].classList.remove('snake');
     });
     snake = [
-        { x: 1, y: 3 }, 
+        { x: 1, y: 3 },
     ];
     drection = 'DOWN';
-     setIntervalID =setInterval(() => {
-    drawSnake();
-}, 400);
+    setIntervalID = setInterval(() => {
+        drawSnake();
+    }, 400);
     Score = 0;
     time = "00-00";
     scoreBoard.innerText = `${Score}`;
@@ -114,16 +126,15 @@ function resetGame() {
     boxes[`${food.x}-${food.y}`].classList.add('food');
     document.querySelector('.modal').classList.add('hidden');
 }
-
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowUp' && drection !== 'DOWN') {
-        drection = 'UP';    
+        drection = 'UP';
     } else if (e.key === 'ArrowDown' && drection !== 'UP') {
         drection = 'DOWN';
     } else if (e.key === 'ArrowLeft' && drection !== 'RIGHT') {
         drection = 'LEFT';
     } else if (e.key === 'ArrowRight' && drection !== 'LEFT') {
         drection = 'RIGHT';
-    }   
+    }
 }
 );
