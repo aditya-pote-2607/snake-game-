@@ -87,6 +87,18 @@ function drawSnake() {
         boxes[`${segment.x}-${segment.y}`].classList.add('snake');
 
     });
+    // snake hit is own body logic can be added here
+    snake.forEach(segment => {
+       console.log(segment);
+       if(snake[0].x === segment.x && snake[0].y === segment.y && segment !== snake[0]){
+        clearInterval(setIntervalID);
+        document.querySelector('.modal').classList.remove('hidden');
+        restartBtn.parentElement.classList.remove('hidden');
+        startBtn.parentElement.classList.add('hidden');
+        return;
+       }
+       
+});
 }
 
 
